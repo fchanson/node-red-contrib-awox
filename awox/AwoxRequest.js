@@ -7,7 +7,7 @@ var isValidIp = function(ip) {
 };
 
 var isNumeric = function(num) {
-	return !isNaN(num) && isFinite(n);
+	return !isNaN(num) && isFinite(num);
 };	
 
 var validRGB  = function(r,g,b) {
