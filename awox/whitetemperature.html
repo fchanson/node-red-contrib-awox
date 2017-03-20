@@ -1,0 +1,96 @@
+<script type="text/x-red" data-template-name="temperature">
+
+    <div class="form-row">
+        <label for="node-input-name"><i class="icon-tag"></i>Name</label>
+        <input type="text" id="node-input-name" placeholder="Name">
+    </div>
+    <div class="form-row">
+    	<label for="node-input-bulb_ip">Bulb IP address</label>
+		<input type="text" id="node-input-bulb_ip" placeholder="IPv4 or IPv6">
+  	</div>
+  	<div class="form-row">
+    	<label for="node-input-method">Method</label>
+	    <select type="text" id="node-input-method">
+	      <option value="get">Get</option>
+	      <option value="set">Set</option>
+	    </select>
+  	</div>
+  	<div class="form-row" id="bulb_temperature" class="hide">
+    	<label for="node-input-bulb_temperature" >Temperature</label>
+		<input type="text" id="node-input-bulb_temperature" placeholder="100">
+  	</div>
+
+
+  	
+</script>
+
+<script type="text/x-red" data-help-name="temperature">
+    <p>This node allows to get/set the white temperature of the Awox StriimLight Color Wifi bulb.</p>
+    
+    <p><b>Get the bulb white temperature</b></p>
+    <p>You have to define some parameters in the node configuration panel : </p>
+	<ul>
+        <li>the bulb IP address.</li>
+        <li>the "get" method.</li>
+    </ul>
+    <p>These parameters can be overridden using the input message : </p>
+	<ul>
+        <li>msg.payload.bulb_ip : the bulb IP address.</li>
+        <li>msg.payload.method = "get" : the "get" method.</li>
+    </ul>
+    <p>The output <b>msg.payload</b> message is defined like this : </p>
+	<ul>
+        <li>bulb_temperature : the bulb white temperature level (integer).</li>
+        <li>status : the status of the request.</li>
+    </ul>
+    
+    <p><b>Set the bulb white temperature</b></p>
+    <p>You have to define some parameters in the node configuration panel : </p>
+	<ul>
+        <li>the bulb IP address.</li>
+        <li>the "set" method.</li>
+        <li>the white temperature level (integer).</li>
+    </ul>
+    <p>These parameters can be overridden using the input message : </p>
+	<ul>
+        <li>msg.payload.bulb_ip : the bulb IP address.</li>
+        <li>msg.payload.method = "set" : the "set" method.</li>
+        <li>msg.payload.bulb_temperature : the white temperature level (integer).</li>
+    </ul>
+    <p>The output <b>msg.payload</b> message contains the status of the request.</p>
+
+</script>
+
+<script type="text/javascript">
+    RED.nodes.registerType('temperature',{
+        category: 'awox',
+        color:"#f76643",
+        defaults: {
+            name: {value:"white temperature"},
+            method: {value:"get"},
+            bulb_ip : {value:"0.0.0.0"},
+            bulb_temperature : {value:"100"}
+        },
+        inputs:1,
+        outputs:1,
+        icon: "light.png",
+        align: "right",
+        label: function() {
+            return this.name;
+        },
+        labelStyle: function() {
+            return (this.name)?"node_label_italic":"";
+        },
+        oneditprepare: function() {
+            $("#node-input-method").change(function() {
+                if ($("#node-input-method").val() === "set") {
+                    $("#bulb_temperature").show();
+                } else {
+                    $("#bulb_temperature").hide();
+                }
+            });
+        }
+
+    });
+</script>
+

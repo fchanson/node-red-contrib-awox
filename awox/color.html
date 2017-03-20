@@ -1,0 +1,115 @@
+
+
+<script type="text/x-red" data-template-name="color">
+
+    <div class="form-row">
+        <label for="node-input-name"><i class="icon-tag"></i>Name</label>
+        <input type="text" id="node-input-name" placeholder="Name">
+    </div>
+    <div class="form-row">
+    	<label for="node-input-bulb_ip">Bulb IP address</label>
+		<input type="text" id="node-input-bulb_ip" placeholder="IPv4 or IPv6">
+  	</div>
+  	<div class="form-row">
+    	<label for="node-input-method">Method</label>
+	    <select type="text" id="node-input-method">
+	      <option value="get">Get</option>
+	      <option value="set">Set</option>
+	    </select>
+  	</div>
+  	<div class="form-row" id="bulb_red" class="hide">
+    	<label for="node-input-bulb_red">Red</label>
+		<input type="text" id="node-input-bulb_red" placeholder="128">
+  	</div>
+  	<div class="form-row" id="bulb_green" class="hide">
+    	<label for="node-input-bulb_green">Green</label>
+		<input type="text" id="node-input-bulb_green" placeholder="128">
+  	</div>
+  	<div class="form-row" id="bulb_blue" class="hide">
+    	<label for="node-input-bulb_blue">Blue</label>
+		<input type="text" id="node-input-bulb_blue" placeholder="128">
+  	</div>
+  	
+</script>
+
+<script type="text/x-red" data-help-name="color">
+    <p>This node allows to get/set the color of the Awox StriimLight Color Wifi bulb.</p>
+    
+    <p><b>Get the bulb color</b></p>
+    <p>You have to define some parameters in the node configuration panel : </p>
+	<ul>
+        <li>the bulb IP address.</li>
+        <li>the "get" method.</li>
+    </ul>
+    <p>These parameters can be overridden using the input message : </p>
+	<ul>
+        <li>msg.payload.bulb_ip : the bulb IP address.</li>
+        <li>msg.payload.method = "get" : the "get" method.</li>
+    </ul>
+    <p>The output <b>msg.payload</b> message is defined like this : </p>
+	<ul>
+        <li>bulb_red : the bulb RED level (integer).</li>
+        <li>bulb_green : the bulb GREEN level (integer).</li>
+        <li>bulb_blue : the bulb BLUE level (integer).</li>
+        <li>status : the status of the request.</li>
+    </ul>
+    
+    <p><b>Set the bulb color</b></p>
+    <p>You have to define some parameters in the node configuration panel : </p>
+	<ul>
+        <li>the bulb IP address.</li>
+        <li>the "set" method.</li>
+        <li>the RED level (integer).</li>
+        <li>the GREEN level (integer).</li>
+        <li>the BLUE level (integer).</li>
+    </ul>
+    <p>These parameters can be overridden using the input message : </p>
+	<ul>
+        <li>msg.payload.bulb_ip : the bulb IP address.</li>
+        <li>msg.payload.method = "set" : the "set" method.</li>
+        <li>msg.payload.bulb_red : the RED level (integer).</li>
+        <li>msg.payload.bulb_green : the GREEN level (integer).</li>
+        <li>msg.payload.bulb_blue : the BLUE level (integer).</li>
+    </ul>
+    <p>The output <b>msg.payload</b> message contains the status of the request.</p>
+</script>
+
+<script type="text/javascript">
+    RED.nodes.registerType('color',{
+        category: 'awox',
+        color:"#f76643",
+        defaults: {
+            name: {value:"color"},
+            method: {value:"get"},
+            bulb_ip : {value:"0.0.0.0"},
+            bulb_red : {value:"128"},
+            bulb_green : {value:"128"},
+            bulb_blue : {value:"128"}
+        },
+        inputs:1,
+        outputs:1,
+        icon: "light.png",
+        align: "right",
+        label: function() {
+            return this.name;
+        },
+        labelStyle: function() {
+            return (this.name)?"node_label_italic":"";
+        },
+        oneditprepare: function() {
+            $("#node-input-method").change(function() {
+                if ($("#node-input-method").val() === "set") {
+                    $("#bulb_red").show();
+                    $("#bulb_blue").show();
+                    $("#bulb_green").show();
+                } else {
+                    $("#bulb_red").hide();
+                    $("#bulb_blue").hide();
+                    $("#bulb_green").hide();
+                }
+            });
+        }
+
+    });
+</script>
+

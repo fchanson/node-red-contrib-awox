@@ -1,0 +1,41 @@
+{
+  "name": "node-red-contrib-awox",
+  "version": "0.0.1",
+  "description": "These nodes allow to control the Awox StriimLight bulbs (Wifi version)",
+  "dependencies": {
+	  "follow-redirects":"*",
+	  "is-ip":"*"
+  },
+  "repository": {
+      "type": "git",
+      "url": "git://github.com/fchanson/node-red-contrib-awox.git"
+  },
+  "keywords": [
+               "node-red",
+               "awox",
+               "striimlight wifi color",
+               "bulb"
+  ],
+  "node-red"     : {
+      "nodes": {
+          "switchonoff": "awox/switchonoff.js",
+          "color": "awox/color.js",
+          "playaudio": "awox/playaudio.js",
+          "say": "awox/say.js",
+          "volume": "awox/volume.js",
+          "brightness": "awox/whitebrightness.js",
+          "temperature": "awox/whitetemperature.js",
+          "mute": "awox/mute.js"
+          
+      }
+  },
+  "author": {
+	    "name": "Frederic Chanson"
+	},
+  "license": "MIT",
+  "bugs": {
+	    "url": "https://github.com/fchanson/node-red-contrib-awox/issues"
+	},
+  "homepage": "https://github.com/fchanson/node-red-contrib-awox",
+  "readmeFilename": "README.md"
+}

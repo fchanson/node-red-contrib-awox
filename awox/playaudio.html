@@ -1,0 +1,59 @@
+
+
+<script type="text/x-red" data-template-name="playaudio">
+
+    <div class="form-row">
+        <label for="node-input-name"><i class="icon-tag"></i>Name</label>
+        <input type="text" id="node-input-name" placeholder="Name">
+    </div>
+    <div class="form-row">
+    	<label for="node-input-bulb_ip">Bulb IP address</label>
+		<input type="text" id="node-input-bulb_ip" placeholder="IPv4 or IPv6">
+  	</div>
+    <div class="form-row">
+    	<label for="node-input-bulb_uri">URI</label>
+		<input type="text" id="node-input-bulb_uri" placeholder="http://">
+  	</div>
+  	
+</script>
+
+<script type="text/x-red" data-help-name="playaudio">
+    <p>This node allows to play a media into the Awox StriimLight Color Wifi bulb.</p>
+    
+    <p>You have to define some parameters in the node configuration panel : </p>
+	<ul>
+        <li>the bulb IP address.</li>
+        <li>the URI of the media to play.</li>
+    </ul>
+    <p>These parameters can be overridden using the input message : </p>
+	<ul>
+        <li>msg.payload.bulb_ip : the bulb IP address.</li>
+        <li>msg.payload.bulb_uri : the URI of the media to play.</li>
+    </ul>
+    <p>The output <b>msg.payload</b> message contains the status of the request.</p>
+
+</script>
+
+<script type="text/javascript">
+    RED.nodes.registerType('playaudio',{
+        category: 'awox',
+        color:"#f76643",
+        defaults: {
+            name: {value:"Play Audio"},
+            bulb_ip : {value:"0.0.0.0"},
+            bulb_uri : {value:""}
+        },
+        inputs:1,
+        outputs:1,
+        icon: "light.png",
+        align: "right",
+        label: function() {
+            return this.name;
+        },
+        labelStyle: function() {
+            return (this.name)?"node_label_italic":"";
+        }
+
+    });
+</script>
+
