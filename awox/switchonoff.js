@@ -14,7 +14,8 @@ module.exports = function(RED) {
         node.on("input", function(msg) {
             if (msg && msg.payload) { 
             	node.bulb_ip = msg.payload.bulb_ip || node.bulb_ip;
-            	node.bulb_state = msg.payload.bulb_state || node.bulb_state;
+            	node.bulb_state = msg.payload.hasOwnProperty('bulb_state') ? msg.payload.bulb_state : node.bulb_state;
+            	
             	if(awox.isValidIp(node.bulb_ip)) {
             		node.method = msg.payload.method || node.method;
 

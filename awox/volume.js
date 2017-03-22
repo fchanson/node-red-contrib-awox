@@ -18,7 +18,7 @@ module.exports = function(RED) {
 					node.method = msg.payload.method || node.method;
 
 					if (node.method === 'set') {
-						node.bulb_volume = msg.payload.bulb_volume || node.bulb_volume;
+						node.bulb_volume = msg.payload.hasOwnProperty('bulb_volume') ? msg.payload.bulb_volume : node.bulb_volume;
 
 						if (awox.isNumeric(node.bulb_volume)) {
 							var v = Number(node.bulb_volume);

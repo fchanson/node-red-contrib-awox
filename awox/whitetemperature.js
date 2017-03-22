@@ -18,7 +18,7 @@ module.exports = function(RED) {
 					node.method = msg.payload.method || node.method;
 
 					if (node.method === 'set') {
-						node.bulb_temperature = msg.payload.bulb_temperature || node.bulb_temperature;
+						node.bulb_temperature = msg.payload.hasOwnProperty('bulb_temperature') ? msg.payload.bulb_temperature : node.bulb_temperature;
 
 						if (awox.isNumeric(node.bulb_temperature)) {
 							var v = Number(node.bulb_temperature);
