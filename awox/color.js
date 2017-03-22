@@ -16,9 +16,10 @@ module.exports = function(RED) {
         node.on("input", function(msg) {
             if (msg && msg.payload) { 
             	node.bulb_ip = msg.payload.bulb_ip || node.bulb_ip;
-            	node.bulb_red = msg.payload.bulb_red || node.bulb_red;
-            	node.bulb_green = msg.payload.bulb_green || node.bulb_green;
-            	node.bulb_blue = msg.payload.bulb_blue || node.bulb_blue;
+            	hasOwnProperty
+            	node.bulb_red = msg.payload.hasOwnProperty('bulb_red') ? msg.payload.bulb_red : node.bulb_red;
+            	node.bulb_green = msg.payload.hasOwnProperty('bulb_green') ? msg.payload.bulb_green : node.bulb_green;
+            	node.bulb_blue = msg.payload.hasOwnProperty('bulb_blue') ? msg.payload.bulb_blue : node.bulb_blue;
             	
             	if(awox.isValidIp(node.bulb_ip)) {
             		node.method = msg.payload.method || node.method;
