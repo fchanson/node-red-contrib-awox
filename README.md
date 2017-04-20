@@ -1,6 +1,6 @@
 # node-red-contrib-awox
 
-These nodes allow to control the Awox StriimLight bulbs (Wifi version).
+These nodes allow to control the Awox StriimLight bulbs **(Wifi version)**.
 
 ### Install
 
