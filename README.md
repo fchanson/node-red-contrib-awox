@@ -29,3 +29,6 @@ This package provides the following nodes :<br>
 - say : to say a text with the bulb (Text to Speech).
 
      
+### License 
+
+MIT License
